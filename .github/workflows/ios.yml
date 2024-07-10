@@ -28,7 +28,7 @@ jobs:
 #          api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
 
       - name: Gluon Build
-        run: ./mvnw -Pios gluonfx:build gluonfx:package
+        run: mvn -Pios gluonfx:build gluonfx:package
 
       - name: Upload
         uses: actions/upload-artifact@v2
