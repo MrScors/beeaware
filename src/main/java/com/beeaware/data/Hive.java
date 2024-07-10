@@ -20,8 +20,10 @@ public class Hive {
     public String toString(){
         StringBuilder builder = new StringBuilder();
         builder.append("H");
+        builder.append(id);
+        builder.append(".B");
         occupiedBoxes.forEach(id -> {
-            builder.append(".").append(id);
+            builder.append(" ").append(id);
         });
         return builder.toString();
     }

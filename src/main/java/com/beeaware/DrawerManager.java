@@ -1,5 +1,6 @@
 package com.beeaware;
 
+import com.beeaware.data.storage.HiveDataStore;
 import com.gluonhq.attach.lifecycle.LifecycleService;
 import com.gluonhq.attach.util.Platform;
 import com.gluonhq.attach.util.Services;
@@ -19,16 +20,18 @@ public class DrawerManager {
     public static void buildDrawer(AppManager app) {
         NavigationDrawer drawer = app.getDrawer();
         
-        NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Application",
-                "Multi View Project",
-                new Avatar(21, new Image(DrawerManager.class.getResourceAsStream("/icon.png"))));
+        NavigationDrawer.Header header = new NavigationDrawer.Header("Bee Aware",
+                "Your Apiary Notes",
+                new Avatar(21, new Image(DrawerManager.class.getResourceAsStream("/beeIcon.jpg"))));
         drawer.setHeader(header);
         
         final Item primaryItem = new ViewItem("Hives List", MaterialDesignIcon.HOME.graphic(), PRIMARY_VIEW, ViewStackPolicy.SKIP);
-        final Item secondaryItem = new ViewItem("New Hive", MaterialDesignIcon.DASHBOARD.graphic(), NEW_HIVE_VIEW);
-        final Item listActionView = new ViewItem("Actions List", MaterialDesignIcon.DASHBOARD.graphic(), LIST_ACTION_VIEW);
-        final Item listObservationView = new ViewItem("Observations List", MaterialDesignIcon.DASHBOARD.graphic(), LIST_OBSERVATION_VIEW);
+        final Item secondaryItem = new ViewItem("New Hive", MaterialDesignIcon.PLUS_ONE.graphic(), NEW_HIVE_VIEW);
+        final Item listActionView = new ViewItem("Actions List", MaterialDesignIcon.LIST.graphic(), LIST_ACTION_VIEW);
+        final Item listObservationView = new ViewItem("Observations List", MaterialDesignIcon.LIST.graphic(), LIST_OBSERVATION_VIEW);
         drawer.getItems().addAll(primaryItem, secondaryItem, listActionView, listObservationView);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(HiveDataStore::saveHives));
         
         if (Platform.isDesktop()) {
             final Item quitItem = new Item("Quit", MaterialDesignIcon.EXIT_TO_APP.graphic());

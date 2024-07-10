@@ -19,7 +19,7 @@
 
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
             <children>
-                <DatePicker fx:id="observationDatePicker"/>
+<!--                <DatePicker fx:id="observationDatePicker"/>-->
                 <HBox spacing="10">
                     <children>
                         <Label fx:id="label1" text="Brood" />

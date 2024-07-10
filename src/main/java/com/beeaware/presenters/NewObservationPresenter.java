@@ -13,8 +13,8 @@ import java.util.UUID;
 
 public class NewObservationPresenter {
 
-    @FXML
-    private DatePicker observationDatePicker;
+//    @FXML
+//    private DatePicker observationDatePicker;
 
     @FXML
     private ChoiceBox<String> stateOfBroodChoiceBox;
@@ -38,20 +38,14 @@ public class NewObservationPresenter {
 
     public void initialize() {
         hive = PrimaryPresenter.selectedHive;
-//        stateOfBroodChoiceBox.getItems().addAll("Dronelayer", "Laying Workers", "Great Brood",
-//                "Normal Brood", "Poor Brood", "Bad Brood");
         stateOfBroodChoiceBox.setValue("Normal Brood");
 
-//        queenPresenceChoiceBox.getItems().addAll("Queen found", "Eggs found", "Virgin found", "Queen hatched");
         queenPresenceChoiceBox.setValue("Eggs found");
 
-//        chalkbroodChoiceBox.getItems().addAll("Lots", "Little", "None");
         chalkbroodChoiceBox.setValue("None");
 
-//        swarmCellsChoiceBox.getItems().addAll("Swarm Cells", "Supersedure Cells", "Both", "None");
         swarmCellsChoiceBox.setValue("None");
 
-//        angerLevelChoiceBox.getItems().addAll("Peaceful", "Moderate", "Angry");
         angerLevelChoiceBox.setValue("Peaceful");
     }
 
@@ -74,12 +68,12 @@ public class NewObservationPresenter {
 
     private void addObservation() {
 
-        if (observationDatePicker.getValue() == null) {
-            return;
-            // add error display
-        }
+//        if (observationDatePicker.getValue() == null) {
+//            return;
+//            // add error display
+//        }
 
-        String date = observationDatePicker.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE);
+//        String date = observationDatePicker.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE);
 
         String stateOfBrood = stateOfBroodChoiceBox.getValue();
         String queenPresence = queenPresenceChoiceBox.getValue();
@@ -87,7 +81,7 @@ public class NewObservationPresenter {
         String swarmCells = swarmCellsChoiceBox.getValue();
         String angerLevel = angerLevelChoiceBox.getValue();
 
-        Observation observation = new Observation(UUID.randomUUID(), hive.getId(), date, stateOfBrood,
+        Observation observation = new Observation(UUID.randomUUID(), hive.getId(), "date", stateOfBrood,
                 queenPresence, chalkbrood, swarmCells, angerLevel);
         ObservationDataStore.addObservation(observation);
 

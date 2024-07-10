@@ -10,6 +10,8 @@ import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,9 +36,7 @@ public class PrimaryPresenter {
                 AppBar appBar = AppManager.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e ->
                         AppManager.getInstance().getDrawer().open()));
-                appBar.setTitleText("Primary");
-                appBar.getActionItems().add(MaterialDesignIcon.SEARCH.button(e ->
-                        System.out.println("Search")));
+                appBar.setTitleText("Hives");
             }
         });
 
@@ -94,13 +94,37 @@ public class PrimaryPresenter {
     }
 
     private void showConfirmationDialog(Hive hive) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirm Removal");
-        alert.setHeaderText("Are you sure you want to remove this hive?");
-        alert.setContentText("Hive ID: " + hive.getId());
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Confirm Removal");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+        // Set custom header
+        Label headerLabel = new Label("Are you sure you want to remove this hive?");
+        headerLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+        dialog.getDialogPane().setHeader(headerLabel);
+
+        // Set custom content
+        Label contentLabel = new Label("Hive ID: " + hive.getId());
+        contentLabel.setStyle("-fx-font-size: 12px;");
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setMaxWidth(Double.MAX_VALUE);
+        GridPane.setHgrow(contentLabel, Priority.ALWAYS);
+        grid.add(contentLabel, 0, 0);
+        dialog.getDialogPane().setContent(grid);
+
+        // Add buttons
+        ButtonType okButtonType = new ButtonType("OK", ButtonType.OK.getButtonData());
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonType.CANCEL.getButtonData());
+        dialog.getDialogPane().getButtonTypes().setAll(okButtonType, cancelButtonType);
+
+        // Apply custom styles to buttons
+        dialog.getDialogPane().lookupButton(okButtonType).setStyle("-fx-font-size: 12px;");
+        dialog.getDialogPane().lookupButton(cancelButtonType).setStyle("-fx-font-size: 12px;");
+
+        // Show the dialog and wait for result
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == okButtonType) {
             HiveDataStore.removeHive(hive);
             loadHives();
         }

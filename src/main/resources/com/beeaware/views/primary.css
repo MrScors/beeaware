@@ -1,3 +1,35 @@
-.view {
+.label, .text-field, .choice-box, .button {
+    -fx-font-size: 18px;
+    -fx-pref-height: 40px;
+}
 
+.list-cell {
+    -fx-font-size: 18px; /* Adjust font size */
+    -fx-padding: 10px;   /* Adjust padding */
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 600px) {
+    .label, .text-field, .choice-box, .button {
+        -fx-font-size: 16px;
+        -fx-pref-height: 36px;
+    }
+
+    .list-cell {
+        -fx-font-size: 16px; /* Adjust font size */
+        -fx-padding: 9px;   /* Adjust padding */
+    }
+}
+
+/* Media query for larger screens */
+@media only screen and (min-width: 1200px) {
+    .label, .text-field, .choice-box, .button {
+        -fx-font-size: 20px;
+        -fx-pref-height: 44px;
+    }
+
+    .list-cell {
+        -fx-font-size: 20px; /* Adjust font size */
+        -fx-padding: 11px;   /* Adjust padding */
+    }
 }

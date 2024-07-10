@@ -42,7 +42,7 @@ public class Main extends Application {
         Swatch.BLUE.assignTo(scene);
 
         scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
-        ((Stage) scene.getWindow()).getIcons().add(new Image(Main.class.getResourceAsStream("/icon.png")));
+        ((Stage) scene.getWindow()).getIcons().add(new Image(Main.class.getResourceAsStream("/beeIcon.jpg")));
     }
 
     public static void main(String args[]) {
