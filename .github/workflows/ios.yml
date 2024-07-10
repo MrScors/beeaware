@@ -23,30 +23,25 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#      - uses: Apple-Actions/import-codesign-certs@v1
-#        with:
-#          p12-file-base64: ${{ secrets.GLUON_IOS_CERTIFICATES_FILE_BASE64 }}
-#          p12-password: ${{ secrets.GLUON_IOS_CERTIFICATES_PASSWORD }}
-
-#      - uses: Apple-Actions/download-provisioning-profiles@v1
-#        with:
-#          bundle-id: com.beeaware.BeeAwareApp
-#          issuer-id: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
-#          api-key-id: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
-#          api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
+      - name: Install libraries
+        run: |
+          sudo apt-get update
+          sudo apt install libasound2-dev libavcodec-dev libavformat-dev libavutil-dev libgl-dev libgtk-3-dev libpango1.0-dev libxtst-dev
 
       - name: Gluon Build
-        run: mvn -Pios gluonfx:build gluonfx:package
+        run: |
+          export ANDROID_SDK=$ANDROID_HOME
+          mvn -Pios gluonfx:build gluonfx:package
+
+
+      - name: Make staging directory
+        run: mkdir staging
+
+      - name: Copy packages to staging
+        run: cp -r target/gluonfx/ios/gvm/BeeAware.* staging
 
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
           name: Package
           path: staging
-
-#      - uses: Apple-Actions/upload-testflight-build@master
-#        with:
-#          app-path: target/gluonfx/arm64-ios/BeeAware.ipa
-#          issuer-id: ${{ secrets.GLUON_IOS_APPSTORE_ISSUER_ID }}
-#          api-key-id: ${{ secrets.GLUON_IOS_APPSTORE_KEY_ID }}
-#          api-private-key: ${{ secrets.GLUON_IOS_APPSTORE_PRIVATE_KEY }}
