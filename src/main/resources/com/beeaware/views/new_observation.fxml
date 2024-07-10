@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.geometry.Insets?>
+<View fx:id="newObservation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="600.0" prefWidth="350.0" stylesheets="@primary.css" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.beeaware.presenters.NewObservationPresenter">
+    <center>
+
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+            <children>
+                <DatePicker fx:id="observationDatePicker"/>
+                <HBox spacing="10">
+                    <children>
+                        <Label fx:id="label1" text="Brood" />
+                        <ChoiceBox fx:id="stateOfBroodChoiceBox">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Dronelayer"/>
+                                    <String fx:value="Laying Workers"/>
+                                    <String fx:value="Great Brood Quality"/>
+                                    <String fx:value="Normal Brood"/>
+                                    <String fx:value="Poor Brood Amount"/>
+                                    <String fx:value="Bad Brood Amount"/>
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                    </children>
+                </HBox>
+                <HBox spacing="10">
+                    <children>
+                        <Label fx:id="label2" text="Queen" />
+                        <ChoiceBox fx:id="queenPresenceChoiceBox">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Queen found"/>
+                                    <String fx:value="Eggs found"/>
+                                    <String fx:value="Virgin found"/>
+                                    <String fx:value="Queen hatched"/>
+                                    <String fx:value="None"/>
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                    </children>
+                </HBox>
+                <HBox spacing="10">
+                    <children>
+                        <Label fx:id="label3" text="Chalkbrood" />
+                        <ChoiceBox fx:id="chalkbroodChoiceBox">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Lots of"/>
+                                    <String fx:value="Little of"/>
+                                    <String fx:value="None"/>
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                    </children>
+                </HBox>
+                <HBox spacing="10">
+                    <children>
+                        <Label fx:id="label4" text="Swarm Cells" />
+                        <ChoiceBox fx:id="swarmCellsChoiceBox">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Swarm Cells"/>
+                                    <String fx:value="Supersedure cells"/>
+                                    <String fx:value="Both"/>
+                                    <String fx:value="None"/>
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                    </children>
+                </HBox>
+                <HBox spacing="10">
+                    <children>
+                        <Label fx:id="label" text="Anger" />
+                        <ChoiceBox fx:id="angerLevelChoiceBox">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Peaceful"/>
+                                    <String fx:value="Moderate"/>
+                                    <String fx:value="Angry"/>
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                    </children>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER">
+                    <children>
+                        <Button text="Done" onAction="#addAndReturn" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                    </children>
+                    <padding>
+                        <Insets left="10" right="10"/>
+                    </padding>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER">
+                    <children>
+                        <Button text="Add Action" onAction="#addAndAddAction" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                    </children>
+                    <padding>
+                        <Insets left="10" right="10"/>
+                    </padding>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER">
+                    <children>
+                        <Button text="Cancel" onAction="#cancel" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                    </children>
+                    <padding>
+                        <Insets left="10" right="10"/>
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+</View>
