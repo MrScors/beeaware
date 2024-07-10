@@ -117,6 +117,18 @@
             <list>com.beeaware.presenters.ListObservationPresenter</list>
           </reflectionList>
           <mainClass>${mainClassName}</mainClass>
+
+          <releaseConfiguration>
+            <!-- for iOS -->
+            <bundleVersion>${env.GITHUB_RUN_NUMBER}</bundleVersion>
+
+            <!-- for Android -->
+            <versionCode>${env.GITHUB_RUN_NUMBER}</versionCode>
+            <providedKeyStorePath>${env.GLUON_ANDROID_KEYSTOREPATH}</providedKeyStorePath>
+            <providedKeyStorePassword>${env.GLUON_ANDROID_KEYSTORE_PASSWORD}</providedKeyStorePassword>
+            <providedKeyAlias>${env.GLUON_ANDROID_KEYALIAS}</providedKeyAlias>
+            <providedKeyAliasPassword>${env.GLUON_ANDROID_KEYALIAS_PASSWORD}</providedKeyAliasPassword>
+          </releaseConfiguration>
         </configuration>
       </plugin>
     </plugins>
